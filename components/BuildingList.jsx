@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 
-function BuildingList({ data }) {
+function BuildingList({ data, clickedID, onBuildingClick }) {
   const [filter, setFilter] = useState('');
-  const [clickedID, setClickedID] = useState(null);
 
   const filteredBuildings = data.filter(directory => 
     directory.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   const handleRowClick = (id) => {
-    setClickedID(id);
+    onBuildingClick(id);  // Use the prop function to notify the parent about the selected building
     console.log(`Row with ID ${id} clicked.`);
   }
 

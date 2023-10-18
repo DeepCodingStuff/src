@@ -1,8 +1,7 @@
 import React from 'react';
 
-function ViewBuilding({clickedID}) {
-  // Find the building using clickedID
-  const selectedBuilding = buildings.find(b => b.id === clickedID);
+function ViewBuilding({ clickedID, data }) {
+  const selectedBuilding = data.find(b => b.id === clickedID);
 
   if (!selectedBuilding) {
     return (
@@ -14,14 +13,22 @@ function ViewBuilding({clickedID}) {
     );
   }
 
+  const latitude = selectedBuilding.coordinates && selectedBuilding.coordinates.latitude ? selectedBuilding.coordinates.latitude : 'N/A';
+  const longitude = selectedBuilding.coordinates && selectedBuilding.coordinates.longitude ? selectedBuilding.coordinates.longitude : 'N/A';
+
   return (
     <div>
       <h2>{selectedBuilding.name}</h2>
       <p>Code: {selectedBuilding.code}</p>
-      <p>Coordinates: {selectedBuilding.coordinates.latitude}, {selectedBuilding.coordinates.longitude}</p>
+      <p>Coordinates: {latitude}, {longitude}</p>
       <p>Address: {selectedBuilding.address}</p>
     </div>
   );
 }
+
+
+ViewBuilding.defaultProps = {
+  data: []
+};
 
 export default ViewBuilding;
